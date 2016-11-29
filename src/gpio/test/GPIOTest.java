@@ -81,16 +81,17 @@ public class GPIOTest {
         
         for(int i = 0 ; i < pins.size() ; i++) {
             System.out.println("pin:" + i + " --> " + pins.get(i).getName() + " : ON");
-            Thread.sleep(200);
-            
             final GpioPinDigitalOutput pinI = pins.get(i);
             pinI.setShutdownOptions(true, PinState.LOW);
+            
+            pinI.toggle();
+            Thread.sleep(100);
             
             // turn off gpio pin i
             pinI.toggle();
             
             System.out.println("pin:" + i + " --> " + pins.get(i).getName() + " GPIO state should be: OFF");
-            Thread.sleep(200);
+            Thread.sleep(100);
         }
         
 
