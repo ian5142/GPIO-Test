@@ -78,22 +78,22 @@ public class GPIOTest {
         pins.add(pin13);
         pins.add(pin14);
         pins.add(pin15);
-        
-        for(int i = 0 ; i < pins.size() ; i++) {
-            System.out.println("pin:" + i + " --> " + pins.get(i).getName() + " : ON");
-            final GpioPinDigitalOutput pinI = pins.get(i);
-            pinI.setShutdownOptions(true, PinState.LOW);
-            
-            pinI.toggle();
-            Thread.sleep(100);
-            
-            // turn off gpio pin i
-            pinI.toggle();
-            
-            System.out.println("pin:" + i + " --> " + pins.get(i).getName() + " GPIO state should be: OFF");
-            Thread.sleep(100);
+        for (int j = 0; j < 1000; j++) {
+            for (int i = 0; i < pins.size(); i++) {
+                System.out.println("pin:" + i + " --> " + pins.get(i).getName() + " : ON");
+                final GpioPinDigitalOutput pinI = pins.get(i);
+                pinI.setShutdownOptions(true, PinState.LOW);
+
+                pinI.toggle();
+                Thread.sleep(100);
+
+                // turn off gpio pin i
+                pinI.toggle();
+
+                System.out.println("pin:" + i + " --> " + pins.get(i).getName() + " GPIO state should be: OFF");
+                Thread.sleep(100);
+            }
         }
-        
 
 //        // toggle the current state of gpio pin #01 (should turn on)
 //        pin01.toggle();
