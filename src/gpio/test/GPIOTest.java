@@ -84,11 +84,7 @@ public class GPIOTest {
                 final GpioPinDigitalOutput pinI = pins.get(i);
                 pinI.setShutdownOptions(true, PinState.LOW);
 
-                pinI.toggle();
-                Thread.sleep(100);
-
-                // turn off gpio pin i
-                pinI.toggle();
+                pinI.pulse(100, true);
 
                 System.out.println("pin:" + i + " --> " + pins.get(i).getName() + " GPIO state should be: OFF");
                 Thread.sleep(100);
