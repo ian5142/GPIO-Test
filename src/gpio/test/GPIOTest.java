@@ -5,6 +5,7 @@ import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
+import digits.*;
 import java.util.ArrayList;
 
 /**
@@ -19,8 +20,31 @@ public class GPIOTest {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("<--Pi4J--> GPIO Control Example ... started.");
         
+        Digits displayDigits = new Digits();
+        
         // create gpio controller
-        final GpioController gpio = GpioFactory.getInstance();
+//        final GpioController gpio = GpioFactory.getInstance();
+        
+        ArrayList<GpioPinDigitalOutput> digitPins = new ArrayList<GpioPinDigitalOutput> ();
+        ArrayList<GpioPinDigitalOutput> digitPins2 = new ArrayList<GpioPinDigitalOutput> ();
+        
+        for (int i = 0 ; i < 11 ; i++) {
+            final GpioController gpio = GpioFactory.getInstance();
+            digitPins = displayDigits.getDigitPins(0, i);
+            digitPins2 = displayDigits.getDigitPins(1, i);
+            for (int j = 0 ; j < digitPins.size() && j < digitPins2.size() ; j++) {
+                final GpioPinDigitalOutput pinI = digitPins.get(j);
+                pinI.setShutdownOptions(true, PinState.LOW);
+                pinI.toggle();
+                
+                final GpioPinDigitalOutput pinI2 = digitPins2.get(j);
+                pinI2.setShutdownOptions(true, PinState.LOW);
+                pinI2.toggle();
+            }
+            Thread.sleep(1000);
+            gpio.shutdown();
+        }
+        
 
         /**
          * Uncomment following lines to display rotating segment on each display.
@@ -94,6 +118,8 @@ public class GPIOTest {
 //            }
 //        }
 
+
+
 //        // toggle the current state of gpio pin #01 (should turn on)
 //        pin01.toggle();
 //        System.out.println("--> GPIO state should be: ON");
@@ -112,7 +138,7 @@ public class GPIOTest {
 
         // stop all GPIO activity/threads by shutting down the GPIO controller
         // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
-        gpio.shutdown();
+//        gpio.shutdown();
 
         System.out.println("Exiting ControlGpioExample");
     }
