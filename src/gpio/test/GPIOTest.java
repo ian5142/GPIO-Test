@@ -28,10 +28,10 @@ public class GPIOTest {
         ArrayList<GpioPinDigitalOutput> digitPins = new ArrayList<GpioPinDigitalOutput> ();
         ArrayList<GpioPinDigitalOutput> digitPins2 = new ArrayList<GpioPinDigitalOutput> ();
         
-        for (int i = 0 ; i < 11 ; i++) {
+//        for (int i = 0 ; i <= 8 ; i++) {
             final GpioController gpio = GpioFactory.getInstance();
-            digitPins = displayDigits.getDigitPins(0, i);
-            digitPins2 = displayDigits.getDigitPins(1, i);
+            digitPins = displayDigits.getDigitPins(0, 6);
+            digitPins2 = displayDigits.getDigitPins(1, 6);
             for (int j = 0 ; j < digitPins.size() && j < digitPins2.size() ; j++) {
                 final GpioPinDigitalOutput pinI = digitPins.get(j);
                 pinI.setShutdownOptions(true, PinState.LOW);
@@ -40,10 +40,11 @@ public class GPIOTest {
                 final GpioPinDigitalOutput pinI2 = digitPins2.get(j);
                 pinI2.setShutdownOptions(true, PinState.LOW);
                 pinI2.toggle();
+                Thread.sleep(200);
             }
-            Thread.sleep(1000);
+            Thread.sleep(10000);
             gpio.shutdown();
-        }
+//        }
         
 
         /**
