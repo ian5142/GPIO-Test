@@ -8,7 +8,7 @@ import com.pi4j.io.gpio.RaspiPin;
 import java.util.ArrayList;
 
 /**
- *
+ * Tests for Two 7-Segment displays attached to a Raspberry PI.
  * @author Ian Van Schaick
  */
 public class GPIOTest {
@@ -18,7 +18,7 @@ public class GPIOTest {
      */
     public static void main(String[] args) throws InterruptedException {
         System.out.println("<--Pi4J--> GPIO Control Example ... started.");
-
+        
         // create gpio controller
         final GpioController gpio = GpioFactory.getInstance();
 
